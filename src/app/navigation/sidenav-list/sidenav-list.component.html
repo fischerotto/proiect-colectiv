@@ -1,67 +1,24 @@
 <mat-nav-list>
-    <!--      Starting Menu      -->
-    <ul *ngIf="!(userLoggedIn$ | async)" class="navigation-items">
-        <li routerLinkActive="active-link" routerLink="/login" (click)="onSidenavClose()">
-            <a mat-list-item>
-                <mat-icon>login</mat-icon> <span class="nav-caption">Login</span>
-            </a>
-        </li>
-        <li routerLinkActive="active-link" routerLink="/register" (click)="onSidenavClose()">
-            <a mat-list-item>
-                <mat-icon>how_to_reg</mat-icon> <span class="nav-caption">Register</span>
-            </a>
-        </li>
-    </ul>
-
-    <!-- !!!!!routes and new menu items should be added during actual implementation-->
-
-    <!--      Employee Menu      -->
-    <ul *ngIf="(userLoggedIn$ && employeeUser$) | async" class="navigation-items">
-        <li (click)="onSidenavClose()">
-            <a mat-list-item>
-                <mat-icon>account_circle</mat-icon>
-                <span class="nav-caption">{{ employeeUser$ | async }}</span>
-            </a>
-        </li>
-        <li (click)="logout()">
-            <a mat-list-item>
-                <mat-icon>person_remove</mat-icon>
-                <span class="nav-caption">Logout</span>
-            </a>
-        </li>
-    </ul>
-
-    <!--      Supervisor Menu      -->
-    <ul *ngIf="(userLoggedIn$ && supervisorUser$) | async" class="navigation-items">
-        <li>
-            <a mat-list-item>
-                <mat-icon>supervisor_account</mat-icon>
-                <span class="nav-caption">
-                    {{ supervisorUser$ | async }}
-                </span>
-            </a>
-        </li>
-        <li (click)="logout()">
-            <a mat-list-item>
-                <mat-icon>person_remove</mat-icon>
-                <span class="nav-caption">Logout</span>
-            </a>
-        </li>
-    </ul>
-
-    <!--      Administrator Menu      -->
-    <ul *ngIf="(userLoggedIn$ && administratorUser$) | async" class="navigation-items">
-        <li>
-            <a mat-list-item>
-                <mat-icon>admin_panel_settings</mat-icon>
-                <span class="nav-caption">{{ administratorUser$ | async }}</span>
-            </a>
-        </li>
-        <li (click)="logout()">
-            <a mat-list-item>
-                <mat-icon>person_remove</mat-icon>
-                <span class="nav-caption">Logout</span>
-            </a>
-        </li>
-    </ul>
+  <!--      Starting Menu      -->
+  <ul *ngIf="true" class="navigation-items">
+    <li
+      routerLinkActive="active-link"
+      routerLink="/login"
+      (click)="onSidenavClose()"
+    >
+      <a mat-list-item>
+        <mat-icon>login</mat-icon> <span class="nav-caption">Login</span>
+      </a>
+    </li>
+    <li
+      routerLinkActive="active-link"
+      routerLink="/register"
+      (click)="onSidenavClose()"
+    >
+      <a mat-list-item>
+        <mat-icon>how_to_reg</mat-icon>
+        <span class="nav-caption">Register</span>
+      </a>
+    </li>
+  </ul>
 </mat-nav-list>

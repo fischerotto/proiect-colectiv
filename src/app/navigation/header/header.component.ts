@@ -1,32 +1,28 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { store, logoutUser, State } from '../../store';
-import { NgRedux, select } from '@angular-redux/store';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { NgRedux, select } from "@angular-redux/store";
+import { Observable } from "rxjs";
+import { AuthService } from "src/app/core/services/auth.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
 
-  @select('userLoggedIn') userLoggedIn$: Observable<boolean>;
-  @select('employeeUser') employeeUser$: Observable<string>;
-  @select('supervisorUser') supervisorUser$: Observable<string>;
-  @select('administratorUser') administratorUser$: Observable<string>;
-
-  constructor(private ngRedux: NgRedux<State>) { }
+  userLoggedIn;
+  constructor(private authService: AuthService) {}
 
   logout() {
-    store.dispatch(logoutUser());
+    this.authService.logout();
   }
 
   ngOnInit(): void {
+    this.userLoggedIn = this.authService.currentUser();
   }
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
-  }
-
+  };
 }

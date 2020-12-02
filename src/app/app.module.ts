@@ -1,19 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { LayoutComponent} from './layout/layout.component';
-import { LoginComponent} from './login/login.component';
-import { RegisterComponent} from './register/register.component';
-import { HeaderComponent} from './navigation/header/header.component';
-import { SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
-import { MaterialModule } from './material/material.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import { RoutingModule } from './routing/routing.module';
-import { NgReduxModule, NgRedux } from '@angular-redux/store';
-import { store, State} from './store';
-
+import { LayoutComponent } from "./layout/layout.component";
+import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
+import { HeaderComponent } from "./navigation/header/header.component";
+import { SidenavListComponent } from "./navigation/sidenav-list/sidenav-list.component";
+import { MaterialModule } from "./material/material.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { RoutingModule } from "./routing.module";
+import { NgReduxModule, NgRedux } from "@angular-redux/store";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,21 +22,21 @@ import { store, State} from './store';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    SidenavListComponent
+    SidenavListComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     RoutingModule,
     NgReduxModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [HttpClientModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-  constructor(ngRedux: NgRedux<State>) {
-    ngRedux.provideStore(store);
-  }
-}
+export class AppModule {}
