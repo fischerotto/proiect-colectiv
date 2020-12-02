@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { EventEmitter } from "protractor";
 import { AuthService } from "../core/services/auth.service";
 import { CookieService } from "../core/services/cookie.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   user;
   constructor(
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -27,8 +29,10 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.authService.login(this.email, this.password).subscribe((data) => {
-      this.user = data;
+      this.user = data.body;
       this.cookieService.setCookie("currentUser", JSON.stringify(this.user), 1);
+      if (this.user.role === "ADMINISTRATOR")
+        this.router.navigateByUrl("/admin");
     });
   }
   @Input() error: string | null;
