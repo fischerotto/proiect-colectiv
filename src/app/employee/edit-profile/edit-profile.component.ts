@@ -12,10 +12,7 @@ import { AuthService } from "src/app/core/services/auth.service";
 export class EditProfileComponent implements OnInit {
   selectedFile: File;
   retrievedImage: any;
-  base64Data: any;
-  retrieveResonse: any;
   message: string;
-  imageName: any;
   userLoggedIn;
   constructor(
     private httpClient: HttpClient,
@@ -27,24 +24,16 @@ export class EditProfileComponent implements OnInit {
     this.getImage();
   }
 
-  //Gets called when the user selects an image
   public onFileChanged(event) {
-    //Select File
     this.selectedFile = event.target.files[0];
   }
-  //Gets called when the user clicks on submit to upload the image
   onUpload() {
-    console.log(this.selectedFile);
-
-    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append(
       "imageFile",
       this.selectedFile,
       this.selectedFile.name
     );
-
-    //Make a call to the Spring Boot Application to save the image
     this.httpClient
       .post("http://localhost:8081/employee/upload", uploadImageData, {
         observe: "response",
@@ -52,19 +41,23 @@ export class EditProfileComponent implements OnInit {
       .subscribe((response) => {
         if (response.status == 200) {
           this.message = "Image uploaded successfully";
+          this.userLoggedIn.profilePicName = null;
+          this.authService.setUser(this.userLoggedIn);
         } else {
           this.message = "Image not uploaded successfully";
         }
       });
   }
-
   getImage() {
     this.employeeProfileService
       .getProfilePic(this.userLoggedIn.profilePicName)
-      .subscribe((res) => {
-        this.retrieveResonse = res;
-        this.base64Data = this.retrieveResonse.profilePic;
-        this.retrievedImage = "data:image/jpeg;base64," + this.base64Data;
-      });
+      .subscribe(
+        (res) => {
+          this.retrievedImage = "data:image/jpeg;base64," + res.profilePic;
+        },
+        (error) => {
+          this.retrievedImage = "assets/profile.png";
+        }
+      );
   }
 }
