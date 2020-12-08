@@ -1,0 +1,28 @@
+<h2>Welcome back!</h2>
+<div class="card-container">
+  <div class="card">
+    <div class="front">
+      <div class="cover"></div>
+      <div
+        class="user"
+        [ngStyle]="{
+          'background-image': 'url(' + retrievedImage + ')'
+        }"
+      ></div>
+      <div class="content">
+        <div class="main">
+          <h3 class="name">{{ userLoggedIn.email }}</h3>
+          <p class="profession">{{ userLoggedIn.role }}</p>
+          <a
+            mat-raised-button
+            color="warn"
+            style="display: block; margin: auto; width: 160px"
+            routerLink="edit-profile"
+          >
+            Edit your profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
