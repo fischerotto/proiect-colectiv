@@ -1,0 +1,103 @@
+mat-list {
+    margin: 0px 10px 0px;
+    width:45%;
+    float: left;
+    flex-grow: 1;
+    overflow: auto;
+    max-height: 245px;
+  }
+
+  mat-list::-webkit-scrollbar {
+    display:none;
+  }
+  
+  mat-list-item {
+    border-bottom: 1px solid #ccc;
+  }
+
+  #YourSkills {
+    border-bottom: 1px solid #ccc;
+  }
+
+  #Level1{
+      background-color: red;
+      border-radius: 10px;
+      margin-left:69%;
+  }
+
+  #Level2{
+    background-color: orange;
+    border-radius: 10px;
+    margin-left:69%;
+  }
+
+  #Level3{
+    background-color: rgb(204, 204, 143);
+    border-radius: 10px;
+    margin-left:69%;
+  }
+
+  #Level4{
+    background-color: lightgreen;
+    border-radius: 10px;
+    margin-left:69%;
+  }
+
+  #Level5{
+    margin-left:69%;
+    background-color: green;
+    border-radius: 10px;
+  }
+
+  #LevelText1,#LevelText2,#LevelText3,#LevelText4,#LevelText5{
+      margin:10px;
+      text-align: center;
+      color:white;
+  }
+
+  #LevelText1{
+    width:80px;
+}
+
+  #LevelText2{
+    width:80px;
+  }
+
+  #LevelText3{
+    width:80px;
+}
+
+#LevelText4{
+    width:80px;
+}
+
+#LevelText5{
+    width:80px;
+}
+
+  #SkillText{
+      margin-top:10px;
+      width:150px;
+      margin-left:200%;
+      margin-right:70%;
+      text-align: center;
+  }
+
+  #AddNewSkill{
+      margin-left:55%;
+      margin-top:30px;
+      width:44%;
+      height:240px;
+  }
+
+  #Nr{
+      margin:10px 0px 0px;
+  }
+
+  #SkillSelect{
+      width:100%;
+    height:35px;
+  }
+  #SkillSelect:focus{
+      outline:none;
+  }

@@ -19,3 +19,54 @@
 <div *ngIf="retrievedImage">
   <img [src]="retrievedImage" />
 </div>
+
+<br />
+<br />
+
+<h1 id="YourSkills"> Your Skills</h1>
+
+<div>
+<mat-list role="list">
+  <mat-list-item role="listitem">
+    <div id="Nr"><p id="NrText">1</p></div>
+    <div id="Skill"><p id="SkillText">Skill 1</p></div>
+    <div id="Level5"><p id="LevelText5">Expert</p></div>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <div id="Nr"><p id="NrText">2</p></div>
+    <div id="Skill"><p id="SkillText">Skill 2</p></div>
+    <div id="Level4"><p id="LevelText4">Advanced</p></div>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <div id="Nr"><p id="NrText">3</p></div>
+    <div id="Skill"><p id="SkillText">Skill 3</p></div>
+    <div id="Level3"><p id="LevelText3">Proficient</p></div>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <div id="Nr"><p id="NrText">4</p></div>
+    <div id="Skill"><p id="SkillText">Skill 4</p></div>
+    <div id="Level2"><p id="LevelText2">Skilled</p></div>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <div id="Nr"><p id="NrText">5</p></div>
+    <div id="Skill"><p id="SkillText">Skill 5</p></div>
+    <div id="Level1"><p id="LevelText1">Beginner</p></div>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <div id="Nr"><p id="NrText">5</p></div>
+    <div id="Skill"><p id="SkillText">Skill 6</p></div>
+    <div id="Level1"><p id="LevelText1">Beginner</p></div>
+  </mat-list-item>
+</mat-list>
+</div>
+<div id="AddNewSkill">
+  <form type="submit">
+    <label for="skillLabel">Add a New Skill</label><br>
+    <select name="skill" id="SkillSelect">
+      <option value="Skill6">Skill 6</option>
+      <option value="Skill7">Skill 7</option>
+      <option value="Skill8">Skill 8</option>
+      <option value="Skill9">Skill 9</option>
+    </select>
+  </form>
+</div>
