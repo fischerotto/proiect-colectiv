@@ -33,6 +33,10 @@ export class LoginComponent implements OnInit {
       this.cookieService.setCookie("currentUser", JSON.stringify(this.user), 1);
       if (this.user.role === "ADMINISTRATOR")
         this.router.navigateByUrl("/admin");
+      else if (this.user.role === "EMPLOYEE")
+        this.router.navigateByUrl("/employee");
+      else if (this.user.role === "SUPERVISOR")
+        this.router.navigateByUrl("/supervisor");
     });
   }
   @Input() error: string | null;
