@@ -1,0 +1,31 @@
+<button mat-raised-button color="primary" routerLink="../">Go back</button>
+<button mat-raised-button color="accent" (click)="enableAddTechnologyArea()">
+  Add new Technology Area
+</button>
+
+<mat-card *ngIf="isEnabled">
+  <form class="example-form">
+    <h3>Technology Area</h3>
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter technology area</mat-label>
+      <textarea [(ngModel)]="technologyName" name="technologyName" matInput placeholder="E.g. Angular"></textarea>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="warn"
+      style="margin: 0px"
+      (click)="handleSave()"
+    >
+      Save
+    </button>
+  </form>
+</mat-card>
+    
+
+
+
+
+<mat-list role="list" >
+  <mat-list-item *ngFor="let technology of technologies" role="listitem">{{technology.technology}}</mat-list-item>
+</mat-list>
+
