@@ -1,0 +1,72 @@
+@import "src/variables";
+button {
+  margin: 10px;
+}
+
+mat-list {
+  margin: 30px 10px 0;
+}
+
+mat-list-item {
+  border-bottom: 1px solid #ccc;
+}
+
+mat-card {
+  margin: 10px;
+}
+mat-form-field {
+  width: 100%;
+}
+
+h2{
+  color: $primary-dark-text;
+  margin-right: 60px;
+  margin-left: 54px;
+}
+
+mat-toolbar {
+  height: 80px;
+  margin-bottom: 20px;
+  background: $secondary-light-text;
+  border-bottom: 1px solid $dark-dividers;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+mat-expansion-panel {
+  margin: 0 10px 0 10px;
+}
+
+.add-message-warning{
+  background: mat-color($warn, A100);
+  color: $primary-light-text;
+}
+
+.add-div {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.close-icon:hover {
+  cursor: pointer;
+}
+
+.add-message-accepted {
+  background: mat-color($primary, A100);
+  color: $primary-light-text;
+}
+
+.container {
+  width: 65%;
+}
+
+.container-flex {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+

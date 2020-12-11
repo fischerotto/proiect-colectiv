@@ -38,4 +38,26 @@ export class AdminService {
       {headers}
     );
   }
+
+    getProjects(token: string) {
+        return this.http.get<any>('http://localhost:8081/administrator/get', {
+            observe: 'response',
+            headers: new HttpHeaders({
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
+
+    addProject(project, token) {
+        return this.http.post<any>(
+            "http://localhost:8081/administrator/addProject",
+            project,
+            {
+                observe: "response",
+                headers: new HttpHeaders({
+                    'Authorization': `Bearer ${token}`
+                })
+            }
+        );
+    }
 }

@@ -1,0 +1,136 @@
+<mat-toolbar>
+    <h2>Projects Area</h2>
+    <button mat-raised-button color="primary" routerLink="../">Go back</button>
+    <button mat-raised-button color="accent" (click)="enableAddProjectsArea()">
+        Add Project
+    </button>
+</mat-toolbar>
+
+<div class="container-flex">
+    <div class="container">
+        <mat-card *ngIf="isEnabled">
+            <form [formGroup]="projectsForm" class="example-form">
+                <div class="add-div">
+                    <span>
+                        <h3>New Project</h3>
+                    </span>
+                    <span (click)="enableAddProjectsArea()" class="material-icons close-icon">
+                        close
+                    </span>
+                </div>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Project name</mat-label>
+                    <textarea formControlName="name" matInput placeholder="E.g. Proiect colectiv"></textarea>
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                        <mat-error *ngIf="name.errors.required">
+                            Project name is required.
+                        </mat-error>
+                        <mat-error *ngIf="name.errors.maxlength">
+                            Project name is too long.
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Customer name</mat-label>
+                    <textarea formControlName="nameCustomer" matInput placeholder="FirstName and LastName"></textarea>
+                    <div *ngIf="nameCustomer.invalid && (nameCustomer.dirty || nameCustomer.touched)" class="alert alert-danger">
+                        <mat-error *ngIf="nameCustomer.errors.required">
+                            Customer name is required.
+                        </mat-error>
+                        <mat-error *ngIf="nameCustomer.errors.minlength">
+                            Customer name is too short.
+                        </mat-error>
+                        <mat-error *ngIf="nameCustomer.errors.maxlength">
+                            Customer name is too long.
+                        </mat-error>
+                        <mat-error *ngIf="nameCustomer.errors.pattern">
+                            Special characters are not allowed.
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea formControlName="description" matInput placeholder="Description..."></textarea>
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+                        <mat-error *ngIf="description.errors.required">
+                            Project description is required.
+                        </mat-error>
+                        <mat-error *ngIf="description.errors.maxlength">
+                            Description is too long.
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Start Date</mat-label>
+                    <input formControlName="startDate" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle style="font-size: 2em" matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="alert alert-danger">
+                        <mat-error *ngIf="startDate.errors.required">
+                            A valid start date is required.
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>End Date</mat-label>
+                    <input formControlName="endDate" matInput [matDatepicker]="picker2">
+                    <mat-datepicker-toggle style="font-size: 2em" matSuffix [for]="picker2">
+                        <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="alert alert-danger">
+                        <mat-error *ngIf="endDate.errors.required">
+                            A valid end date is required.
+                        </mat-error>
+                    </div>
+                </mat-form-field>
+
+                <button
+                        mat-raised-button
+                        color="warn"
+                        style="margin: 0px"
+                        (click)="handleSave()"
+                >
+                    Save
+                </button>
+                <mat-error *ngIf=errors>
+                    Please check the inputs values once more. All the errors should be solved!
+                </mat-error>
+            </form>
+        </mat-card>
+
+        <mat-card *ngIf=addProjectMessage class="add-message-{{typeMessage}}">
+            <div class="add-div">
+                <span>{{addProjectMessage}}</span>
+                <span (click)="closeMessage()" class="material-icons close-icon">
+                    close
+                </span>
+            </div>
+        </mat-card>
+
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let project of projects; index as i; first as isFirst">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{project.name}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Click here to display details
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-list role="list">
+                    <label>Customer Name</label>
+                    <mat-list-item role="listitem">{{project.nameCustomer}}</mat-list-item>
+                    <label>Description</label>
+                    <mat-list-item role="listitem">{{project.description}}</mat-list-item>
+                    <label>StartDate</label>
+                    <mat-list-item role="listitem">{{project.startDate}}</mat-list-item>
+                    <label>EndDate</label>
+                    <mat-list-item role="listitem">{{project.endDate}}</mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
