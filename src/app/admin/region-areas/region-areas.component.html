@@ -1,1 +1,30 @@
-<p>region-areas works!</p>
+<button mat-raised-button color="primary" routerLink="../">Go back</button>
+<button mat-raised-button color="accent" (click)="enableAddRegionArea()">
+  Add new Region
+</button>
+
+<mat-card *ngIf="isEnabled">
+  <form class="example-form">
+    <h3>New region</h3>
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter region name</mat-label>
+      <textarea matInput [(ngModel)]="regionName" name="regionName"  placeholder="E.g. Romania"></textarea>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="warn"
+      style="margin: 0px"
+      (click)="handleSave()"
+    >
+      Save
+    </button>
+  </form>
+</mat-card>
+
+
+
+<mat-list role="list" >
+  <mat-list-item *ngFor="let region of regions" role="listitem">{{region.region}}</mat-list-item>
+</mat-list>
+
+

@@ -14,6 +14,21 @@ export class EditProfileComponent implements OnInit {
   retrievedImage: any;
   message: string;
   userLoggedIn;
+
+  //data
+  skills;
+  projects;
+
+  //userData
+  userSkills;
+  userProjects;
+
+  //skillForm;
+  newSkillId;
+  newSkillGrade;
+
+  //projectForm\
+  newProjectId;
   constructor(
     private httpClient: HttpClient,
     private employeeProfileService: EmployeeProfileService,
@@ -22,6 +37,9 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userLoggedIn = this.authService.currentUser();
     this.getImage();
+    this.getAllSkills();
+    this.getAllProjects();
+    this.getUserData();
   }
 
   public onFileChanged(event) {
@@ -53,11 +71,59 @@ export class EditProfileComponent implements OnInit {
       .getProfilePic(this.userLoggedIn.profilePicName)
       .subscribe(
         (res) => {
-          this.retrievedImage = "data:image/jpeg;base64," + res.profilePic;
+          if(res){
+            this.retrievedImage = "data:image/jpeg;base64," + res.profilePic;
+          }else{
+            this.retrievedImage = "assets/profile.png";
+          }
         },
         (error) => {
           this.retrievedImage = "assets/profile.png";
         }
       );
+  }
+
+  getAllSkills(){
+    this.employeeProfileService.getSkills().subscribe(
+      (data)=>{
+        this.skills = data;
+        console.log(this.skills);
+      }
+    );
+  }
+
+  getAllProjects(){
+    this.employeeProfileService.getProjects().subscribe(
+      (data)=>{
+        this.projects = data;
+        console.log(this.projects);
+      }
+    );
+  }
+
+  getUserData(){
+    this.employeeProfileService.getUserData().subscribe(
+      (data)=>{
+        console.log(data);
+        this.userSkills = data.userSkills;
+        this.userProjects = data.projects;
+      }
+    )
+  }
+
+  addNewSkill(){
+    this.employeeProfileService.addSkill(this.newSkillId,this.newSkillGrade).subscribe((data)=>{
+      console.log(data);
+      this.newSkillId = null;
+      this.newSkillGrade = null;
+      this.getUserData();
+    });
+  }
+  
+  addNewProject(){
+    this.employeeProfileService.addProject(this.newProjectId).subscribe((data)=>{
+      this.newProjectId = null;
+      this.getUserData();
+    });
   }
 }

@@ -25,7 +25,11 @@ export class DashboardComponent implements OnInit {
       .getProfilePic(this.userLoggedIn.profilePicName)
       .subscribe(
         (res) => {
-          this.retrievedImage = "data:image/jpeg;base64," + res.profilePic;
+          if(res){
+            this.retrievedImage = "data:image/jpeg;base64," + res.profilePic;
+          }else{
+            this.retrievedImage = "assets/profile.png";
+          }
         },
         (error) => {
           this.retrievedImage = "assets/profile.png";

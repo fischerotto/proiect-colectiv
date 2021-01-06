@@ -13,6 +13,16 @@ mat-list {
   
   mat-list-item {
     border-bottom: 1px solid #ccc;
+    .mat-list-item-content{
+      display:flex!important;
+      justify-content: space-between;
+      width: 100%;
+      div{
+        display: flex;
+        width: 100%;
+      }
+    }
+    
   }
 
   #YourSkills {
@@ -22,29 +32,24 @@ mat-list {
   #Level1{
       background-color: red;
       border-radius: 10px;
-      margin-left:69%;
   }
 
   #Level2{
     background-color: orange;
     border-radius: 10px;
-    margin-left:69%;
   }
 
   #Level3{
     background-color: rgb(204, 204, 143);
     border-radius: 10px;
-    margin-left:69%;
   }
 
   #Level4{
     background-color: lightgreen;
     border-radius: 10px;
-    margin-left:69%;
   }
 
   #Level5{
-    margin-left:69%;
     background-color: green;
     border-radius: 10px;
   }
@@ -78,7 +83,6 @@ mat-list {
   #SkillText{
       margin-top:10px;
       width:150px;
-      margin-left:200%;
       margin-right:70%;
       text-align: center;
   }
@@ -100,4 +104,10 @@ mat-list {
   }
   #SkillSelect:focus{
       outline:none;
+  }
+
+  .container{
+    width:80%;
+    display: block;
+    margin: 100px auto;
   }

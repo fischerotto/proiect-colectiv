@@ -1,72 +1,106 @@
-<input type="file" (change)="onFileChanged($event)" />
+<div class="container">
+  <button mat-raised-button color="primary" style="margin-bottom: 20px;" routerLink="../">Go back</button>
 
-<br />
-<button
-  mat-raised-button
-  color="warn"
-  style="margin: 0px"
-  (click)="onUpload()"
-  value="upload"
->
-  Upload image
-</button>
-<br />
-<br />
 
-<br />
-<br />
+  <div class="image-container" style="display: flex; justify-content: start; margin-bottom: 30px;">
 
-<div *ngIf="retrievedImage">
-  <img [src]="retrievedImage" />
-</div>
 
-<br />
-<br />
+    <div *ngIf="retrievedImage">
+      <img [src]="retrievedImage" />
+    </div>
+    <div style="display: block; margin: 30px;">
+      <input type="file" (change)="onFileChanged($event)" /> <br>
+      <button mat-raised-button color="warn" style="margin: 20px 0px" (click)="onUpload()" value="upload">
+        Upload image
+      </button>
+    </div>
+  </div>
 
-<h1 id="YourSkills"> Your Skills</h1>
 
-<div>
-<mat-list role="list">
-  <mat-list-item role="listitem">
-    <div id="Nr"><p id="NrText">1</p></div>
-    <div id="Skill"><p id="SkillText">Skill 1</p></div>
-    <div id="Level5"><p id="LevelText5">Expert</p></div>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <div id="Nr"><p id="NrText">2</p></div>
-    <div id="Skill"><p id="SkillText">Skill 2</p></div>
-    <div id="Level4"><p id="LevelText4">Advanced</p></div>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <div id="Nr"><p id="NrText">3</p></div>
-    <div id="Skill"><p id="SkillText">Skill 3</p></div>
-    <div id="Level3"><p id="LevelText3">Proficient</p></div>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <div id="Nr"><p id="NrText">4</p></div>
-    <div id="Skill"><p id="SkillText">Skill 4</p></div>
-    <div id="Level2"><p id="LevelText2">Skilled</p></div>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <div id="Nr"><p id="NrText">5</p></div>
-    <div id="Skill"><p id="SkillText">Skill 5</p></div>
-    <div id="Level1"><p id="LevelText1">Beginner</p></div>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <div id="Nr"><p id="NrText">5</p></div>
-    <div id="Skill"><p id="SkillText">Skill 6</p></div>
-    <div id="Level1"><p id="LevelText1">Beginner</p></div>
-  </mat-list-item>
-</mat-list>
-</div>
-<div id="AddNewSkill">
-  <form type="submit">
-    <label for="skillLabel">Add a New Skill</label><br>
-    <select name="skill" id="SkillSelect">
-      <option value="Skill6">Skill 6</option>
-      <option value="Skill7">Skill 7</option>
-      <option value="Skill8">Skill 8</option>
-      <option value="Skill9">Skill 9</option>
-    </select>
-  </form>
+  <h1 id="YourSkills"> Your Skills</h1>
+
+  <div>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let skill of userSkills">
+        <div id="Skill">
+          <p id="SkillText">{{skill.skills}}</p>
+        </div>
+        <div id="Level5" *ngIf="skill.grade==5">
+          <p id="LevelText5">Expert</p>
+        </div>
+        <div id="Level4" *ngIf="skill.grade==4">
+          <p id="LevelText5">Advanced</p>
+        </div>
+        <div id="Level3" *ngIf="skill.grade==3">
+          <p id="LevelText5">Intermediate</p>
+        </div>
+        <div id="Level2" *ngIf="skill.grade==2">
+          <p id="LevelText5">Bad</p>
+        </div>
+        <div id="Level1" *ngIf="skill.grade==1">
+          <p id="LevelText5">Very Bad</p>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div id="AddNewSkill">
+    <form type="submit">
+      <h4>Add a new skill</h4>
+      <mat-form-field appearance="fill" style="margin:5px" >
+        <mat-label>Skill</mat-label>
+        <mat-select [(ngModel)]="newSkillId" name="newSkillId">
+          <mat-option [value]="skill.id" *ngFor="let skill of skills" >
+            {{skill.skill}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="margin: 5px;">
+        <mat-label>Grade</mat-label>
+        <mat-select [(ngModel)]="newSkillGrade" name="newSkillGrade">
+          <mat-option value="1">
+            Very Bad
+          </mat-option>
+          <mat-option value="2">
+            Bad
+          </mat-option>
+          <mat-option value="3">
+            Intermediate
+          </mat-option>
+          <mat-option value="4">
+            Advanced
+          </mat-option>
+          <mat-option value="5">
+            Expert
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" style="margin:5px;" (click)="addNewSkill()">Submit</button>
+    </form>
+  </div>
+
+
+  <h1 id="YourSkills"> Your Projects</h1>
+
+  <div>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let project of userProjects">
+        {{project.name}}
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div id="AddNewSkill">
+    <form type="submit">
+      <h4>Add a new project</h4>
+      <mat-form-field appearance="fill" style="margin:5px">
+        <mat-label>Projects</mat-label>
+        <mat-select [(ngModel)]="newProjectId" name="newProjectId">
+          <mat-option [value]="project.id"  *ngFor="let project of projects">
+            {{project.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" style="margin:5px;"  (click)="addNewProject()">Submit</button>
+    </form>
+  </div>
 </div>

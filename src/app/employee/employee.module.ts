@@ -8,6 +8,6 @@ import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [DashboardComponent, EditProfileComponent],
-  imports: [CommonModule, EmployeeRoutingModule, MaterialModule, FormsModule],
+  imports: [CommonModule, EmployeeRoutingModule,FormsModule, MaterialModule ],
 })
 export class EmployeeModule {}

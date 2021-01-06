@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.authService.login(this.email, this.password).subscribe((data) => {
+      console.log(data);
       this.user = data.body;
       this.cookieService.setCookie("currentUser", JSON.stringify(this.user), 1);
       if (this.user.role === "ADMINISTRATOR")
