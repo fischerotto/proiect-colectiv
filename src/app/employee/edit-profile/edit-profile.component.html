@@ -1,10 +1,7 @@
 <div class="container">
   <button mat-raised-button color="primary" style="margin-bottom: 20px;" routerLink="../">Go back</button>
 
-
   <div class="image-container" style="display: flex; justify-content: start; margin-bottom: 30px;">
-
-
     <div *ngIf="retrievedImage">
       <img [src]="retrievedImage" />
     </div>
@@ -12,19 +9,22 @@
       <input type="file" (change)="onFileChanged($event)" /> <br>
       <button mat-raised-button color="warn" style="margin: 20px 0px" (click)="onUpload()" value="upload">
         Upload image
-      </button>
+      </button> <br>
+      <button mat-raised-button color="primary" style="margin-bottom: 20px;" (click)="verifyAccount()">Submit account to
+        verification</button>
     </div>
   </div>
 
-
   <h1 id="YourSkills"> Your Skills</h1>
 
-  <div>
-    <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor="let skill of userSkills">
-        <div id="Skill">
-          <p id="SkillText">{{skill.skills}}</p>
-        </div>
+  <table>
+    <tr>
+      <th>Skill</th>
+      <th>Level</th>
+    </tr>
+    <tr *ngFor="let skill of userSkills">
+      <td>{{skill.skills}}</td>
+      <td>
         <div id="Level5" *ngIf="skill.grade==5">
           <p id="LevelText5">Expert</p>
         </div>
@@ -40,67 +40,122 @@
         <div id="Level1" *ngIf="skill.grade==1">
           <p id="LevelText5">Very Bad</p>
         </div>
-      </mat-list-item>
-    </mat-list>
-  </div>
-  <div id="AddNewSkill">
-    <form type="submit">
-      <h4>Add a new skill</h4>
-      <mat-form-field appearance="fill" style="margin:5px" >
-        <mat-label>Skill</mat-label>
-        <mat-select [(ngModel)]="newSkillId" name="newSkillId">
-          <mat-option [value]="skill.id" *ngFor="let skill of skills" >
-            {{skill.skill}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      </td>
+    </tr>
+  </table>
 
-      <mat-form-field appearance="fill" style="margin: 5px;">
-        <mat-label>Grade</mat-label>
-        <mat-select [(ngModel)]="newSkillGrade" name="newSkillGrade">
-          <mat-option value="1">
-            Very Bad
-          </mat-option>
-          <mat-option value="2">
-            Bad
-          </mat-option>
-          <mat-option value="3">
-            Intermediate
-          </mat-option>
-          <mat-option value="4">
-            Advanced
-          </mat-option>
-          <mat-option value="5">
-            Expert
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button color="primary" style="margin:5px;" (click)="addNewSkill()">Submit</button>
-    </form>
-  </div>
+  <form type="submit" style="margin-top: 10px;">
+    <h4>Add a new skill</h4>
+    <mat-form-field appearance="fill" style="margin:5px">
+      <mat-label>Skill</mat-label>
+      <mat-select [(ngModel)]="newSkillId" name="newSkillId">
+        <mat-option [value]="skill.id" *ngFor="let skill of skills">
+          {{skill.skill}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="margin: 5px;">
+      <mat-label>Grade</mat-label>
+      <mat-select [(ngModel)]="newSkillGrade" name="newSkillGrade">
+        <mat-option value="1">
+          Very Bad
+        </mat-option>
+        <mat-option value="2">
+          Bad
+        </mat-option>
+        <mat-option value="3">
+          Intermediate
+        </mat-option>
+        <mat-option value="4">
+          Advanced
+        </mat-option>
+        <mat-option value="5">
+          Expert
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" style="margin:5px;" (click)="addNewSkill()">Submit</button>
+  </form>
 
 
   <h1 id="YourSkills"> Your Projects</h1>
 
-  <div>
-    <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor="let project of userProjects">
-        {{project.name}}
-      </mat-list-item>
-    </mat-list>
-  </div>
-  <div id="AddNewSkill">
-    <form type="submit">
-      <h4>Add a new project</h4>
-      <mat-form-field appearance="fill" style="margin:5px">
-        <mat-label>Projects</mat-label>
-        <mat-select [(ngModel)]="newProjectId" name="newProjectId">
-          <mat-option [value]="project.id"  *ngFor="let project of projects">
-            {{project.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button color="primary" style="margin:5px;"  (click)="addNewProject()">Submit</button>
-    </form>
-  </div>
+  <table>
+    <tr>
+      <th>Project</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Role</th>
+      <th>Technologies</th>
+    </tr>
+    <tr *ngFor="let project of userProjects">
+      <td>{{project.project.name}}</td>
+      <td>{{project.startDate}}</td>
+      <td>{{project.endDate}}</td>
+      <td>{{project.role}}</td>
+      <td>{{project.technologies}}</td>
+    </tr>
+  </table>
+  <form type="submit" style="margin-top:10px">
+    <h3>Add a new project</h3>
+    <mat-form-field appearance="fill" style="margin:5px">
+      <mat-label>Projects</mat-label>
+      <mat-select [(ngModel)]="newProjectId" name="newProjectId">
+        <mat-option [value]="project.id" *ngFor="let project of projects">
+          {{project.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" name="startDate">
+      <mat-datepicker-toggle style="font-size: 2em" matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>today</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate" name="endDate">
+      <mat-datepicker-toggle style="font-size: 2em" matSuffix [for]="picker2">
+        <mat-icon matDatepickerToggleIcon>today</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="margin:5px">
+      <mat-label>Role</mat-label>
+      <mat-select [(ngModel)]="newRole" name="newRole">
+        <mat-option value="Developer">
+          Developer
+        </mat-option>
+        <mat-option value="Tester">
+          Tester
+        </mat-option>
+        <mat-option value="Scrummaster">
+          Scrum Master
+        </mat-option>
+        <mat-option value="Architect">
+          Architect
+        </mat-option>
+        <mat-option value="Manager">
+          Manager
+        </mat-option>
+        <mat-option value="PO">
+          Product Owner
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Technologies</mat-label>
+      <mat-select [(ngModel)]="newTechnologies" name="newTechnologies" multiple>
+        <mat-option *ngFor="let technology of technologies" [value]="technology.technology">{{technology.technology}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" style="margin:5px;" (click)="addNewProject()">Submit</button>
+  </form>
 </div>

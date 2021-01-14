@@ -32,26 +32,31 @@ mat-list {
   #Level1{
       background-color: red;
       border-radius: 10px;
+      width: 100px;
   }
 
   #Level2{
     background-color: orange;
     border-radius: 10px;
+    width: 100px;
   }
 
   #Level3{
     background-color: rgb(204, 204, 143);
     border-radius: 10px;
+    width: 100px;
   }
 
   #Level4{
     background-color: lightgreen;
     border-radius: 10px;
+    width: 100px;
   }
 
   #Level5{
     background-color: green;
     border-radius: 10px;
+    width: 100px;
   }
 
   #LevelText1,#LevelText2,#LevelText3,#LevelText4,#LevelText5{
@@ -99,7 +104,7 @@ mat-list {
   }
 
   #SkillSelect{
-      width:100%;
+    width:100%;
     height:35px;
   }
   #SkillSelect:focus{
@@ -110,4 +115,20 @@ mat-list {
     width:80%;
     display: block;
     margin: 100px auto;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
   }

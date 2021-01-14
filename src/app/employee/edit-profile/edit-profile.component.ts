@@ -15,6 +15,8 @@ export class EditProfileComponent implements OnInit {
   message: string;
   userLoggedIn;
 
+  technologies;
+
   //data
   skills;
   projects;
@@ -26,20 +28,28 @@ export class EditProfileComponent implements OnInit {
   //skillForm;
   newSkillId;
   newSkillGrade;
-
-  //projectForm\
+  
+  //projectForm
   newProjectId;
+  startDate;
+  endDate;
+  newRole;
+  newTechnologies;
+
   constructor(
     private httpClient: HttpClient,
     private employeeProfileService: EmployeeProfileService,
     private authService: AuthService
   ) {}
+
   ngOnInit(): void {
     this.userLoggedIn = this.authService.currentUser();
     this.getImage();
     this.getAllSkills();
     this.getAllProjects();
     this.getUserData();
+    this.getUserProjectDetails();
+    this.getAllTechnologies();
   }
 
   public onFileChanged(event) {
@@ -106,7 +116,6 @@ export class EditProfileComponent implements OnInit {
       (data)=>{
         console.log(data);
         this.userSkills = data.userSkills;
-        this.userProjects = data.projects;
       }
     )
   }
@@ -121,9 +130,31 @@ export class EditProfileComponent implements OnInit {
   }
   
   addNewProject(){
-    this.employeeProfileService.addProject(this.newProjectId).subscribe((data)=>{
+    this.employeeProfileService.addProject(this.newProjectId,this.startDate, this.endDate, this.newRole, this.newTechnologies.join()).subscribe((data)=>{
       this.newProjectId = null;
-      this.getUserData();
+      this.startDate = null;
+      this.endDate = null;
+      this.newRole = null;
+      this.newTechnologies = null;
+      this.getUserProjectDetails();
     });
+  }
+
+  verifyAccount(){
+    this.employeeProfileService.verifyAccount().subscribe((data)=>{
+      console.log(data);
+    });
+  }
+
+  getUserProjectDetails(){
+    this.employeeProfileService.getUserProjectDetails().subscribe((data)=>{
+      this.userProjects = data;
+    });
+  }
+
+  getAllTechnologies(){
+   this.employeeProfileService.getTechnologies().subscribe((data)=>{
+     this.technologies = data;
+   })
   }
 }
