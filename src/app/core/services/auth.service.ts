@@ -44,6 +44,21 @@ export class AuthService {
   }
 
   /**
+   * Performs the registration
+   * @param email email of user
+   * @param password password of user
+   * @param role
+   */
+  register(email: string, password: string, role: string) {
+    let url = "http://localhost:8081/api/public/register";
+    return this.http.post<any>(
+        url,
+        { email, password, role },
+        { observe: "response" }
+    );
+  }
+
+  /**
    * Logout the user
    */
   logout() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { EventEmitter } from "protractor";
 import { AuthService } from "../core/services/auth.service";
 import { CookieService } from "../core/services/cookie.service";
@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   email;
   password;
   user;
+  registerMessage = '';
+  hide = true;
   constructor(
     private authService: AuthService,
     private cookieService: CookieService,
@@ -23,8 +25,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   form: FormGroup = new FormGroup({
-    email: new FormControl(""),
-    password: new FormControl(""),
+    email: new FormControl('', [
+      Validators.pattern('[a-zA-Z0-9\\.]+@[a-zA-Z\\.]+\\.[a-zA-Z]+'),
+      Validators.required
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
 
   submit() {
@@ -38,7 +46,14 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/employee");
       else if (this.user.role === "SUPERVISOR")
         this.router.navigateByUrl("/supervisor");
+    } ,(error) => {
+      console.log(error)
+      this.registerMessage = "There was a problem with the login. Check your login credentials!";
     });
   }
   @Input() error: string | null;
+
+  closeMessage() {
+    this.registerMessage ='';
+  }
 }

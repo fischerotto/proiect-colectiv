@@ -3,6 +3,8 @@ button {
   margin: 10px;
 }
 
+
+
 mat-list {
   margin: 30px 10px 0;
 }
@@ -60,7 +62,7 @@ mat-expansion-panel {
 }
 
 .container {
-  width: 65%;
+  width: 50%;
 }
 
 .container-flex {
@@ -69,4 +71,11 @@ mat-expansion-panel {
   margin-bottom: 100px;
 }
 
+.example-form {
+  padding: 30px;
+
+  h3 {
+    font-size: 25px;
+  }
+}
 

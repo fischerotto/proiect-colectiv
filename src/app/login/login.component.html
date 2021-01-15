@@ -1,45 +1,71 @@
 <div class="main-div">
-  <mat-card>
-    <mat-card-title style="margin-bottom: 20px">Login</mat-card-title>
-    <mat-card-content class="text-center">
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <p>
-          <mat-form-field>
-            <input
-              type="text"
-              matInput
-              placeholder="Email"
-              formControlName="email"
-              autocomplete="off"
-              [(ngModel)]="email"
-              name="email"
-            />
-          </mat-form-field>
-        </p>
+  <mat-card *ngIf=registerMessage class="add-message-warning">
+    <div class="add-div">
+      <span>{{registerMessage}}</span>
+      <span (click)="closeMessage()" class="material-icons close-icon">
+                    close
+                </span>
+    </div>
+  </mat-card>
+  <mat-card class="main-mat-card">
+    <div style="width: 90%; text-align: center;">
+      <mat-card-title class="card-title">Login Form</mat-card-title>
+      <mat-card-content class="text-center">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <mat-icon color="primary" matPrefix style="margin-right: 10px">forward_to_inbox</mat-icon>
+              <input
+                      type="text"
+                      matInput
+                      placeholder="Email"
+                      formControlName="email"
+                      autocomplete="off"
+                      [(ngModel)]="email"
+                      name="email"
+              />
+              <mat-error *ngIf="form.get('email').errors?.required">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="form.get('email').errors?.pattern">
+                Invalid email address format
+              </mat-error>
+            </mat-form-field>
 
-        <p>
-          <mat-form-field>
-            <input
-              type="password"
-              matInput
-              placeholder="Password"
-              formControlName="password"
-              autocomplete="off"
-              [(ngModel)]="password"
-              name="password"
-            />
-          </mat-form-field>
-        </p>
 
-        <p *ngIf="error" class="error">
-          {{ error }}
-        </p>
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <button
+                      color="primary"
+                      mat-icon-button
+                      matPrefix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"
+                      style="margin-right: 10px"
+              >
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <input
+                      matInput
+                      [type]="hide ? 'password' : 'text'"
+                      placeholder="Password"
+                      formControlName="password"
+                      autocomplete="off"
+                      [(ngModel)]="password"
+                      name="password"
+              />
+              <mat-error *ngIf="form.get('password').errors?.required">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="form.get('password').errors?.minlength">
+                Password length is too short
+              </mat-error>
+            </mat-form-field>
 
-        <div class="button">
-          <button type="submit" mat-raised-button color="primary">Login</button>
-        </div>
-      </form>
-    </mat-card-content>
-    <a routerLink="/register">Already have an account?</a>
+          <div class="button">
+            <button type="submit" mat-raised-button color="accent" class="submit-button">Login</button>
+          </div>
+        </form>
+      </mat-card-content>
+      <a class="card-side-text" routerLink="/register">Don't have an account? <span style="font-weight: 400">Signup now</span></a>
+    </div>
   </mat-card>
 </div>

@@ -1,6 +1,39 @@
-mat-card {
-  width: 60%;
+@import "src/variables";
+
+
+.main-div {
+  display: flex;
+  flex-direction: column;
 }
+.main-mat-card {
+  width: 35%;
+  height: 80%;
+  padding: 50px 50px 90px;
+  box-sizing: border-box;
+  display: flex;
+  //flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title {
+  margin-bottom: 50px;
+  padding-top: 20px;
+  font-size: 30px;
+}
+
+.submit-button {
+  width: 100%;
+  height: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 20px;
+}
+
+//::ng-deep .mat-form-field-wrapper {
+//  padding-bottom: 2px;
+//}
+
 .main-div {
   height: 85vh;
   display: flex;
@@ -9,4 +42,27 @@ mat-card {
 }
 mat-form-field {
   width: 100%;
+}
+
+.card-side-text {
+  color: #838383;
+  text-decoration: none;
+}
+
+.add-message-warning{
+  background: mat-color($warn, A100);
+  color: $primary-light-text;
+  height: 30px;
+  margin-bottom: 10px;
+  width: 33%;
+}
+
+.add-div {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.close-icon:hover {
+  cursor: pointer;
 }
