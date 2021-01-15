@@ -12,7 +12,7 @@
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
     <!--      Starting Menu      -->
     <ul
-      *ngIf="!userLoggedIn"
+      *ngIf="!userLoggedIn "
       fxLayout
       fxLayoutGap="8px"
       class="navigation-items"
@@ -23,16 +23,13 @@
       <li routerLinkActive="active-link">
         <a routerLink="/register">Register</a>
       </li>
-      <li routerLinkActive="active-link">
-        <a routerLink="/admin">Admin</a>
-      </li>
     </ul>
 
     <!-- !!!!!routes and new menu items should be added during actual implementation-->
 
     <!--      Employee Menu      -->
     <ul
-      *ngIf="userLoggedIn?.role === 'Employee'"
+      *ngIf="userLoggedIn?.role === 'EMPLOYEE'"
       fxLayout
       fxLayoutGap="8px"
       class="navigation-items"
@@ -40,14 +37,14 @@
       <li [matMenuTriggerFor]="dropdownmenu">
         <a>
           <mat-icon>account_circle</mat-icon>
-          <span></span>
+          <span>{{userEmail}}</span>
         </a>
       </li>
     </ul>
 
     <!--      Supervisor Menu      -->
     <ul
-      *ngIf="userLoggedIn?.role === 'Supervisor'"
+      *ngIf="userLoggedIn?.role === 'SUPERVISOR'"
       fxLayout
       fxLayoutGap="8px"
       class="navigation-items"
@@ -55,17 +52,47 @@
       <li [matMenuTriggerFor]="dropdownmenu">
         <a>
           <mat-icon>supervisor_account</mat-icon>
-          <span> </span>
+          <span>{{userEmail}}</span>
         </a>
       </li>
     </ul>
 
     <!--      Administrator Menu      -->
     <ul
-      *ngIf="userLoggedIn?.role === 'Administrator'"
+      *ngIf="userLoggedIn?.role === 'ADMINISTRATOR'"
       fxLayout
       fxLayoutGap="8px"
       class="navigation-items"
+    >
+
+      <li routerLinkActive="active-link">
+        <a routerLink="admin/skill-areas">Skills</a>
+      </li>
+      <li routerLinkActive="active-link">
+        <a routerLink="admin/technology-areas">Technologies</a>
+      </li>
+      <li routerLinkActive="active-link">
+        <a routerLink="admin/projects-area">Projects</a>
+      </li>
+
+      <li routerLinkActive="active-link">
+        <a routerLink="admin/regions-area">Regions</a>
+      </li>
+
+      <li [matMenuTriggerFor]="dropdownmenu">
+        <a>
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span>{{userEmail}}</span>
+        </a>
+      </li>
+
+    </ul>
+
+    <ul
+            *ngIf="userLoggedIn?.role === 'READONLYUSER'"
+            fxLayout
+            fxLayoutGap="8px"
+            class="navigation-items"
     >
       <li [matMenuTriggerFor]="dropdownmenu">
         <a>
@@ -77,10 +104,12 @@
 
     <!--    Logout dropdown menu    -->
     <mat-menu #dropdownmenu="matMenu" class="drop-down-menu" xPosition="before">
+      <a routerLink="/login">
       <button mat-menu-item (click)="logout()">
         <mat-icon class="drop-down-menu__icon">person_remove</mat-icon>
         <span class="drop-down-menu__option">Logout</span>
       </button>
+      </a>
     </mat-menu>
   </div>
 </mat-toolbar>

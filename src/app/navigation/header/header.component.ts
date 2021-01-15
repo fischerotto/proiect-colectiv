@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {Component, OnInit, Output, EventEmitter, SimpleChanges, Input} from '@angular/core';
 import { NgRedux, select } from "@angular-redux/store";
 import { Observable } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
@@ -12,14 +12,20 @@ export class HeaderComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
 
   userLoggedIn;
-  constructor(private authService: AuthService) {}
+  userLoggedInOld;
+  userEmail;
+  constructor(private authService: AuthService) {
+  }
 
   logout() {
     this.authService.logout();
+    this.userLoggedIn = this.authService.currentUser();
   }
 
   ngOnInit(): void {
     this.userLoggedIn = this.authService.currentUser();
+    this.userLoggedInOld = this.userLoggedIn;
+    this.userEmail = this.userLoggedIn.email;
   }
 
   public onToggleSidenav = () => {
